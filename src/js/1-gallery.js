@@ -1,4 +1,5 @@
-import simpleLightbox from "simplelightbox";
+import SimpleLightbox from "simplelightbox";
+import "simplelightbox/dist/simple-lightbox.min.css";
 
 const images = [
     {
@@ -68,22 +69,9 @@ const images = [
     .join('');
   
   galleryContainer.innerHTML = galleryMarkup;
+
   
-  galleryContainer.addEventListener('click', event => {
-    event.preventDefault();
+  const gallery = new SimpleLightbox('.gallery a', {captionsData:"alt", captionDelay: 250});
   
-    const isGalleryImage = event.target.classList.contains('gallery-image');
-  
-    if (!isGalleryImage) {
-      return;
-    }
-  
-    const largeImageURL = event.target.dataset.source;
-  
-    const instance = basicLightbox.create(`
-      <img src="${largeImageURL}" width="800" height="600">
-    `);
-  
-    instance.show();
-  });
+
   
