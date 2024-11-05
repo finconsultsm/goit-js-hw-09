@@ -1,4 +1,5 @@
-const formData = {email: " ", message: " "};
+const localData = JSON.parse(localStorage.getItem("feedback-form-state"))
+let formData = localData ? localData :   {email: " ", message: " "};
 
 const form = document.querySelector(".feedback-form");
 const emailInput = form.querySelector("input");
@@ -7,11 +8,9 @@ const messageInput = form.querySelector("textarea");
 emailInput.addEventListener("input", inputHandler) 
 messageInput.addEventListener("input", inputHandler) 
 
-const localData = JSON.parse(localStorage.getItem("feedback-form-state"))
-if (localData) {
-    emailInput.value = localData.email;
-    messageInput.value = localData.message;
-}
+emailInput.value = formData.email;
+messageInput.value = formData.message;
+
 
 function inputHandler(evt) {
  const value = evt.target.value;
@@ -31,6 +30,7 @@ if (emailInput.value === "" || messageInput.value === "") {
     return;
 }
 console.log(formData);
+formData = {email: " ", message: " "}
 
 emailInput.value = "";
 messageInput.value = "";
